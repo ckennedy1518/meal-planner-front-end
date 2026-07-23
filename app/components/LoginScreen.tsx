@@ -1,7 +1,7 @@
 import { Image } from 'expo-image';
 import { useState } from 'react';
 import { Button, TextInput } from 'react-native';
-import { useLoginInfo } from '../hooks/useLoginInfo';
+import { useMealPlannerStore } from '../state/useMealPlannerStore';
 import '../styles/login.scss';
 import ParallaxScrollView from './ParallaxScrollView';
 import { ThemedText } from './ThemedText';
@@ -61,7 +61,7 @@ async function login(
     password: string,
     setHasLoginFailed: (hasLoginFailed: boolean) => void
 ): Promise<void> {
-    const supabaseClient = useLoginInfo.getState().client;
+    const supabaseClient = useMealPlannerStore.getState().client;
     const { data, error } = await supabaseClient.auth.signInWithPassword({
         email: userName,
         password: password
@@ -74,5 +74,5 @@ async function login(
     }
 
     setHasLoginFailed(false);
-    useLoginInfo.getState().login(userName, data.session.access_token);
+    useMealPlannerStore.getState().login(userName, data.session.access_token);
 }
