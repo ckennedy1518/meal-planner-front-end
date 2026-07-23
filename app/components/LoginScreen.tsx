@@ -7,9 +7,10 @@ import ParallaxScrollView from "./ParallaxScrollView";
 import { ThemedText } from './ThemedText';
 import { ThemedView } from './ThemedView';
 
-export function LoginScreen() {
+export function LoginScreen(): React.JSX.Element {
     const [userName, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [hasLoginFailed, setHasLoginFailed] = useState(false);
 
     return (
         <ParallaxScrollView
@@ -33,22 +34,34 @@ export function LoginScreen() {
               secureTextEntry
               value={password}
               onChangeText={setPassword}
-              onTouchEnd={() => login(userName, password)}
+              onTouchEnd={async () => await login(userName, password, setHasLoginFailed)}
             />
             <Button
               title="Login"
-              onPress={() => login(userName, password)}
+              onPress={async () => await login(userName, password, setHasLoginFailed)}
             />
+            {hasLoginFailed && (
+                <ThemedView className="">
+                    <ThemedText type="title">Login failed. Please try again.</ThemedText>
+                </ThemedView>
+            )}
         </ParallaxScrollView>
     );
 }
 
-function login(userName: string, password: string) {
-    // todo: call service to validate user and password
+async function login(userName: string, password: string, setHasLoginFailed: (hasLoginFailed: boolean) => void): Promise<void> {
+    const supabaseClient = useLoginInfo.getState().client;
+    const { data, error } = await supabaseClient.auth.signInWithPassword({
+        email: userName,
+        password: password,
+    });
 
-    // set login info in zustand store
-    if (userName && password) {
-        const token = "dummy-token"; // replace with actual token from service
-        useLoginInfo.getState().login(userName, token);
+    if (error !== null || data.session?.access_token === null) {
+        setHasLoginFailed(true);
+        console.log('Login error message: ', error?.message);
+        return;
     }
+
+    setHasLoginFailed(false);
+    useLoginInfo.getState().login(userName, data.session.access_token);
 }

@@ -1,23 +1,29 @@
-import { create } from 'zustand'
-import { devtools } from 'zustand/middleware'
+import { SupabaseClient } from '@supabase/supabase-js';
+import { create } from 'zustand';
+import { devtools } from 'zustand/middleware';
+import { createSupabaseClient } from './helpers/createSupabaseClient';
 
 type Store = {
-  user: string | null
-  token: string | null
-  login: (user: string, token: string) => void
-  logout: () => void
-  updateData: () => void
+  isLoggedIn: boolean | null,
+  user: string | null,
+  token: string | null,
+  client: SupabaseClient,
+  login: (user: string, token: string) => void,
+  logout: () => void,
+  refreshToken: (token: string) => void,
 }
 
 export const useLoginInfo = create<Store>()(
   devtools(
     (set) => ({
+      isLoggedIn: null,
       user: null,
       token: null,
-      login: (user, token) => set({ user, token }, undefined, 'auth/login'),
-      logout: () => set({ user: null, token: null }, undefined, 'auth/logout'),
-      updateData: () =>
-        set({ user: 'updated' }, undefined, 'internal/updateData'),
+      client: createSupabaseClient(),
+      login: (user, token) => set({ user, token, isLoggedIn: true }, undefined, 'auth/login'),
+      logout: () => set({ user: null, token: null, isLoggedIn: false }, undefined, 'auth/logout'),
+      refreshToken: (token) =>
+        set({ token: token }, undefined, 'internal/updateData'),
     }),
     {
       name: 'AuthStore',

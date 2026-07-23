@@ -1,11 +1,9 @@
 import { Button, Text, View } from "react-native";
 import { LoginScreen } from "./components/LoginScreen";
-import { useIsLoggedIn } from "./hooks/useIsLoggedIn";
 import { useLoginInfo } from "./hooks/useLoginInfo";
 
 export default function Index() {
-
-  const isLoggedIn: boolean = useIsLoggedIn();
+  const isLoggedIn: boolean | null = useLoginInfo((state) => state.isLoggedIn);
 
   return isLoggedIn ? (
     <View
