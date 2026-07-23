@@ -1,11 +1,21 @@
+import { useEffect } from "react";
 import { Button, Text, View } from "react-native";
 import { LoginScreen } from "./components/LoginScreen";
+import { isLoggedIn } from "./hooks/helpers/isLoggedIn";
 import { useLoginInfo } from "./hooks/useLoginInfo";
 
-export default function Index() {
-  const isLoggedIn: boolean | null = useLoginInfo((state) => state.isLoggedIn);
+export default async function Index() {
+  const isUserLoggedIn: boolean | null = useLoginInfo((state) => state.isLoggedIn);
 
-  return isLoggedIn ? (
+  useEffect(() => {
+    async function checkLoginStatus() {
+      await isLoggedIn();
+    }
+
+    checkLoginStatus();
+  }, []); // empty dependency array ensures this runs only once on mount
+
+  return isUserLoggedIn ? (
     <View
       style={{
         flex: 1,
