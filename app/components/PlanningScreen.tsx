@@ -1,10 +1,15 @@
 import { Image } from 'expo-image';
 import { useIsLoggedIn } from '../hooks/useIsLoggedIn';
+import { useMealPlannerStore } from '../state/useMealPlannerStore';
 import ParallaxScrollView from './ParallaxScrollView';
 import { ThemedText } from './ThemedText';
 
-export async function PlanningScreen(): Promise<React.JSX.Element> {
-    await useIsLoggedIn();
+export function PlanningScreen(): React.JSX.Element {
+    const { isChecking, isLoggedIn } = useIsLoggedIn();
+
+    if (!isChecking && !isLoggedIn) {
+        useMealPlannerStore.getState().logout();
+    }
 
     return (
         <ParallaxScrollView
@@ -16,7 +21,11 @@ export async function PlanningScreen(): Promise<React.JSX.Element> {
                 />
             }
         >
-            <ThemedText>Planning Screen</ThemedText>
+            {isChecking ? (
+                <ThemedText>Checking login status...</ThemedText>
+            ) : (
+                <ThemedText>Planning Screen</ThemedText>
+            )}
         </ParallaxScrollView>
     );
 }

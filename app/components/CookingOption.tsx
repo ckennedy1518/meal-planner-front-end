@@ -1,6 +1,5 @@
 import { View } from 'react-native';
 import { useMealPlannerStore } from '../state/useMealPlannerStore';
-import '../styles/landingScreen.scss';
 import { Recipe } from '../utilities/types';
 import { ThemedText } from './ThemedText';
 
