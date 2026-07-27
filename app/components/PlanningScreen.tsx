@@ -21,11 +21,7 @@ export function PlanningScreen(): React.JSX.Element {
                 />
             }
         >
-            {isChecking ? (
-                <ThemedText>Checking login status...</ThemedText>
-            ) : (
-                <ThemedText>Planning Screen</ThemedText>
-            )}
+            <ThemedText>Planning Screen</ThemedText>
         </ParallaxScrollView>
     );
 }

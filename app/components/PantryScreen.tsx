@@ -1,12 +1,10 @@
 import { Image } from 'expo-image';
 import { useIsLoggedIn } from '../hooks/useIsLoggedIn';
 import { useMealPlannerStore } from '../state/useMealPlannerStore';
-import '../styles/landingScreen.scss';
-import { CookingOption } from './CookingOption';
-import { FooterSelector } from './FooterSelector';
 import ParallaxScrollView from './ParallaxScrollView';
+import { ThemedText } from './ThemedText';
 
-export function LandingScreen(): React.JSX.Element {
+export function PantryScreen(): React.JSX.Element {
     const { isChecking, isLoggedIn } = useIsLoggedIn();
 
     if (!isChecking && !isLoggedIn) {
@@ -23,8 +21,7 @@ export function LandingScreen(): React.JSX.Element {
                 />
             }
         >
-            <CookingOption />
-            <FooterSelector />
+            <ThemedText>Pantry Screen</ThemedText>
         </ParallaxScrollView>
     );
 }

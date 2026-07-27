@@ -1,4 +1,4 @@
-export type Mode = 'cook' | 'plan' | null;
+export type Mode = 'cook' | 'pantry' | 'plan' | null;
 export type Recipe = {
     name: string;
     ingredients: string[];
