@@ -38,30 +38,6 @@ export function UserSettingsScreen(): React.JSX.Element {
 }
 
 const styles = StyleSheet.create({
-    avatarContainer: {
-        position: 'absolute',
-        top: 20,
-        right: 24,
-        height: 64,
-        backgroundColor: '#ffffff',
-        borderRadius: 32,
-        overflow: 'hidden',
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 4 },
-        shadowOpacity: 0.2,
-        shadowRadius: 10,
-        elevation: 10
-    },
-    avatarButton: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    menu: {
-        position: 'absolute',
-        top: 20,
-        right: 84
-    },
     reactLogo: {
         height: 178,
         width: 290,

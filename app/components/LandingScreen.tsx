@@ -1,4 +1,5 @@
 import { Image } from 'expo-image';
+import { useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { useIsLoggedIn } from '../hooks/useIsLoggedIn';
 import { useMealPlannerStore } from '../state/useMealPlannerStore';
@@ -8,9 +9,11 @@ import ParallaxScrollView from './ParallaxScrollView';
 export function LandingScreen(): React.JSX.Element {
     const { isChecking, isLoggedIn } = useIsLoggedIn();
 
-    if (!isChecking && !isLoggedIn) {
-        useMealPlannerStore.getState().logout();
-    }
+    useEffect(() => {
+        if (!isChecking && !isLoggedIn) {
+            useMealPlannerStore.getState().logout();
+        }
+    }, [isChecking, isLoggedIn]);
 
     return (
         <ParallaxScrollView
