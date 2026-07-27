@@ -17,6 +17,11 @@ export function UserSettingsScreen(): React.JSX.Element {
         }
     }, [isChecking, isLoggedIn]);
 
+    // TODO: Add optional settings (screen always on)
+    // TODO: (day 2) add photo
+    // TODO: (day 2) edit email
+    // TODO: (day 2) Reset password?
+
     return (
         <>
             <ThemedText>User Settings Screen</ThemedText>

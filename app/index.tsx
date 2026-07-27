@@ -1,7 +1,6 @@
 import { Image, StyleSheet } from 'react-native';
 import { CookingScreen } from './components/CookingScreen';
 import { FooterSelector } from './components/FooterSelector';
-import { LandingScreen } from './components/LandingScreen';
 import { LoginScreen } from './components/LoginScreen';
 import { PantryScreen } from './components/PantryScreen';
 import ParallaxScrollView from './components/ParallaxScrollView';
@@ -31,8 +30,7 @@ export default function Index() {
                     />
                 }
             >
-                {mode === null && <LandingScreen />}
-                {mode === 'cook' && <CookingScreen />}
+                {(mode === null || mode === 'cook') && <CookingScreen />}
                 {mode === 'pantry' && <PantryScreen />}
                 {mode === 'plan' && <PlanningScreen />}
                 {mode === 'settings' && <UserSettingsScreen />}

@@ -12,5 +12,9 @@ export function PantryScreen(): React.JSX.Element {
         }
     }, [isChecking, isLoggedIn]);
 
+    // TODO: display ingredients
+    // TODO: "I went grocery shopping" button
+    // TODO: Allow manual adding of ingredients
+
     return <ThemedText>Pantry Screen</ThemedText>;
 }
