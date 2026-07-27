@@ -1,4 +1,5 @@
 import { Image } from 'expo-image';
+import { StyleSheet } from 'react-native';
 import { useIsLoggedIn } from '../hooks/useIsLoggedIn';
 import { useMealPlannerStore } from '../state/useMealPlannerStore';
 import ParallaxScrollView from './ParallaxScrollView';
@@ -17,7 +18,7 @@ export function PlanningScreen(): React.JSX.Element {
             headerImage={
                 <Image
                     source={require('@/assets/images/partial-react-logo.png')}
-                    className="reactLogo"
+                    style={styles.reactLogo}
                 />
             }
         >
@@ -25,3 +26,13 @@ export function PlanningScreen(): React.JSX.Element {
         </ParallaxScrollView>
     );
 }
+
+const styles = StyleSheet.create({
+    reactLogo: {
+        height: 178,
+        width: 290,
+        bottom: 0,
+        left: 0,
+        position: 'absolute'
+    }
+});

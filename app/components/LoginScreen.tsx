@@ -1,8 +1,7 @@
 import { Image } from 'expo-image';
 import { useState } from 'react';
-import { Button, TextInput } from 'react-native';
+import { Button, StyleSheet, TextInput } from 'react-native';
 import { useMealPlannerStore } from '../state/useMealPlannerStore';
-import '../styles/login.scss';
 import ParallaxScrollView from './ParallaxScrollView';
 import { ThemedText } from './ThemedText';
 import { ThemedView } from './ThemedView';
@@ -18,11 +17,11 @@ export function LoginScreen(): React.JSX.Element {
             headerImage={
                 <Image
                     source={require('@/assets/images/partial-react-logo.png')}
-                    className="reactLogo"
+                    style={styles.reactLogo}
                 />
             }
         >
-            <ThemedView className="">
+            <ThemedView>
                 <ThemedText type="title">Welcome!</ThemedText>
             </ThemedView>
             <TextInput
@@ -46,7 +45,7 @@ export function LoginScreen(): React.JSX.Element {
                 }
             />
             {hasLoginFailed && (
-                <ThemedView className="">
+                <ThemedView>
                     <ThemedText type="title">
                         Login failed. Please try again.
                     </ThemedText>
@@ -76,3 +75,13 @@ async function login(
     setHasLoginFailed(false);
     useMealPlannerStore.getState().login(userName, data.session.access_token);
 }
+
+const styles = StyleSheet.create({
+    reactLogo: {
+        height: 178,
+        width: 290,
+        bottom: 0,
+        left: 0,
+        position: 'absolute'
+    }
+});

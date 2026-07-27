@@ -25,7 +25,6 @@ export default function Index() {
             {mode === 'cook' && <CookingScreen />}
             {mode === 'pantry' && <PantryScreen />}
             {mode === 'plan' && <PlanningScreen />}
-            <FooterSelector />
             <View
                 style={{
                     flex: 1,
@@ -39,6 +38,7 @@ export default function Index() {
                     onPress={() => useMealPlannerStore.getState().logout()}
                 />
             </View>
+            <FooterSelector />
         </>
     );
 }

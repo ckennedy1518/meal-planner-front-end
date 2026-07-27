@@ -1,9 +1,8 @@
 import { Image } from 'expo-image';
+import { StyleSheet } from 'react-native';
 import { useIsLoggedIn } from '../hooks/useIsLoggedIn';
 import { useMealPlannerStore } from '../state/useMealPlannerStore';
-import '../styles/landingScreen.scss';
 import { CookingOption } from './CookingOption';
-import { FooterSelector } from './FooterSelector';
 import ParallaxScrollView from './ParallaxScrollView';
 
 export function LandingScreen(): React.JSX.Element {
@@ -19,12 +18,21 @@ export function LandingScreen(): React.JSX.Element {
             headerImage={
                 <Image
                     source={require('@/assets/images/partial-react-logo.png')}
-                    className="reactLogo"
+                    style={styles.reactLogo}
                 />
             }
         >
             <CookingOption />
-            <FooterSelector />
         </ParallaxScrollView>
     );
 }
+
+const styles = StyleSheet.create({
+    reactLogo: {
+        height: 178,
+        width: 290,
+        bottom: 0,
+        left: 0,
+        position: 'absolute'
+    }
+});
