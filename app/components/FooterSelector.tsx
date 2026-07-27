@@ -1,12 +1,12 @@
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faJar } from '@fortawesome/free-solid-svg-icons';
+import { faJar, faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { useMealPlannerStore } from '../state/useMealPlannerStore';
 import { Mode } from '../utilities/types';
 
-library.add(faJar);
+library.add(faJar, faUser);
 
 export function FooterSelector(): React.JSX.Element {
     const modeSelected: Mode | null = useMealPlannerStore(
@@ -43,12 +43,22 @@ export function FooterSelector(): React.JSX.Element {
             <TouchableOpacity
                 style={[
                     styles.footerButton,
-                    styles.footerButtonRight,
+                    styles.footerButtonMiddle,
                     modeSelected === 'plan' && styles.footerButtonActive
                 ]}
                 onPress={() => handlePress('plan')}
             >
                 <MaterialCommunityIcons name="notebook" size={40} />
+            </TouchableOpacity>
+            <TouchableOpacity
+                style={[
+                    styles.footerButton,
+                    styles.footerButtonRight,
+                    modeSelected === 'settings' && styles.footerButtonActive
+                ]}
+                onPress={() => handlePress('settings')}
+            >
+                <FontAwesomeIcon icon="user" size={40} />
             </TouchableOpacity>
         </View>
     );
