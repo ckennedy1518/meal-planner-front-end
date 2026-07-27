@@ -1,10 +1,7 @@
-import { Image } from 'expo-image';
 import { useEffect } from 'react';
-import { StyleSheet } from 'react-native';
 import { useIsLoggedIn } from '../hooks/useIsLoggedIn';
 import { useMealPlannerStore } from '../state/useMealPlannerStore';
 import { CookingOption } from './CookingOption';
-import ParallaxScrollView from './ParallaxScrollView';
 
 export function LandingScreen(): React.JSX.Element {
     const { isChecking, isLoggedIn } = useIsLoggedIn();
@@ -15,27 +12,5 @@ export function LandingScreen(): React.JSX.Element {
         }
     }, [isChecking, isLoggedIn]);
 
-    return (
-        <ParallaxScrollView
-            headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-            headerImage={
-                <Image
-                    source={require('@/assets/images/partial-react-logo.png')}
-                    style={styles.reactLogo}
-                />
-            }
-        >
-            <CookingOption />
-        </ParallaxScrollView>
-    );
+    return <CookingOption />;
 }
-
-const styles = StyleSheet.create({
-    reactLogo: {
-        height: 178,
-        width: 290,
-        bottom: 0,
-        left: 0,
-        position: 'absolute'
-    }
-});

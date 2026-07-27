@@ -1,9 +1,10 @@
-import { View } from 'react-native';
+import { Image, StyleSheet } from 'react-native';
 import { CookingScreen } from './components/CookingScreen';
 import { FooterSelector } from './components/FooterSelector';
 import { LandingScreen } from './components/LandingScreen';
 import { LoginScreen } from './components/LoginScreen';
 import { PantryScreen } from './components/PantryScreen';
+import ParallaxScrollView from './components/ParallaxScrollView';
 import { PlanningScreen } from './components/PlanningScreen';
 import { UserSettingsScreen } from './components/UserSettingsScreen';
 import { useMealPlannerStore } from './state/useMealPlannerStore';
@@ -20,13 +21,33 @@ export default function Index() {
     }
 
     return (
-        <View style={{ flex: 1 }}>
-            {mode === null && <LandingScreen />}
-            {mode === 'cook' && <CookingScreen />}
-            {mode === 'pantry' && <PantryScreen />}
-            {mode === 'plan' && <PlanningScreen />}
-            {mode === 'settings' && <UserSettingsScreen />}
+        <>
+            <ParallaxScrollView
+                headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
+                headerImage={
+                    <Image
+                        source={require('@/assets/images/partial-react-logo.png')}
+                        style={styles.reactLogo}
+                    />
+                }
+            >
+                {mode === null && <LandingScreen />}
+                {mode === 'cook' && <CookingScreen />}
+                {mode === 'pantry' && <PantryScreen />}
+                {mode === 'plan' && <PlanningScreen />}
+                {mode === 'settings' && <UserSettingsScreen />}
+            </ParallaxScrollView>
             <FooterSelector />
-        </View>
+        </>
     );
 }
+
+const styles = StyleSheet.create({
+    reactLogo: {
+        height: 178,
+        width: 290,
+        bottom: 0,
+        left: 0,
+        position: 'absolute'
+    }
+});
