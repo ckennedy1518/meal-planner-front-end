@@ -9,7 +9,8 @@
         "ios": "expo start --ios",
         "web": "expo start --web",
         "lint": "expo lint",
-        "prettier": "npx prettier --write ."
+        "prettier": "npx prettier --write .",
+        "test": "jest --coverage"
     },
     "dependencies": {
         "@expo/vector-icons": "^15.1.1",
@@ -46,9 +47,11 @@
         "zustand": "^5.0.14"
     },
     "devDependencies": {
+        "@types/jest": "^29.5.0",
         "@types/react": "~19.1.0",
         "eslint": "^9.25.0",
         "eslint-config-expo": "~10.0.0",
+        "ts-jest": "^29.3.0",
         "typescript": "~5.9.2"
     },
     "private": true

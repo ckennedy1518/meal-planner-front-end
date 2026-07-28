@@ -36,7 +36,11 @@ yarn-error.*
 # typescript
 *.tsbuildinfo
 
-app-example
+# initial example expo app
+app-example/
+
+# testing
+coverage/
 
 # generated native folders
 /ios
