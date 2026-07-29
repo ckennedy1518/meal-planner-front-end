@@ -11,6 +11,9 @@ export type Ingredient = {
     name: string;
     quantity: number;
     unit: Unit;
-    secondaryQuantity: number | undefined; // e.g. 1 lb 10 oz
-    secondaryUnit: Unit | undefined;
+    isStaple: boolean;
+};
+export type GetPantryInfoResponse = {
+    message: string;
+    pantry_items: Ingredient[];
 };

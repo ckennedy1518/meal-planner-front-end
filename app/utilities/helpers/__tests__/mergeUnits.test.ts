@@ -13,15 +13,13 @@ describe('mergeUnits', () => {
             name: 'Sugar',
             quantity: 1,
             unit: 'C',
-            secondaryQuantity: undefined,
-            secondaryUnit: undefined
+            isStaple: true
         };
         const ingredient2: Ingredient = {
             name: 'Sugar',
             quantity: 16,
             unit: 'Tbsp',
-            secondaryQuantity: undefined,
-            secondaryUnit: undefined
+            isStaple: true
         };
 
         const result = mergeUnits(ingredient1, ingredient2, true);
@@ -36,15 +34,13 @@ describe('mergeUnits', () => {
             name: 'Milk',
             quantity: 2,
             unit: 'C',
-            secondaryQuantity: undefined,
-            secondaryUnit: undefined
+            isStaple: false
         };
         const ingredient2: Ingredient = {
             name: 'Milk',
             quantity: 48,
             unit: 'tsp',
-            secondaryQuantity: undefined,
-            secondaryUnit: undefined
+            isStaple: false
         };
 
         const result = mergeUnits(ingredient1, ingredient2, false);
@@ -110,6 +106,13 @@ describe('mergeUnits', () => {
             quantity1: 1,
             quantity2: 1,
             expected: 237.588
+        },
+        {
+            ingredient1Unit: 'tsp' as Unit,
+            ingredient2Unit: 'tsp' as Unit,
+            quantity1: 1,
+            quantity2: 1,
+            expected: 2
         }
     ])(
         'adds quantities correctly for $ingredient1Unit and $ingredient2Unit',
@@ -124,15 +127,13 @@ describe('mergeUnits', () => {
                 name: 'Test Ingredient',
                 quantity: quantity1,
                 unit: ingredient1Unit,
-                secondaryQuantity: undefined,
-                secondaryUnit: undefined
+                isStaple: false
             };
             const ingredient2: Ingredient = {
                 name: 'Test Ingredient',
                 quantity: quantity2,
                 unit: ingredient2Unit,
-                secondaryQuantity: undefined,
-                secondaryUnit: undefined
+                isStaple: false
             };
 
             const multiplier = getConversionRatio(
@@ -160,15 +161,13 @@ describe('mergeUnits', () => {
             name: 'Salt',
             quantity: 1,
             unit: 'C',
-            secondaryQuantity: undefined,
-            secondaryUnit: undefined
+            isStaple: true
         };
         const ingredient2: Ingredient = {
             name: 'Pepper',
             quantity: 1,
             unit: 'C',
-            secondaryQuantity: undefined,
-            secondaryUnit: undefined
+            isStaple: true
         };
 
         const result = mergeUnits(ingredient1, ingredient2, true);
@@ -185,15 +184,13 @@ describe('mergeUnits', () => {
             name: 'Flour',
             quantity: 1,
             unit: 'C',
-            secondaryQuantity: undefined,
-            secondaryUnit: undefined
+            isStaple: true
         };
         const ingredient2: Ingredient = {
             name: 'Flour',
             quantity: 1,
             unit: 'g',
-            secondaryQuantity: undefined,
-            secondaryUnit: undefined
+            isStaple: true
         };
 
         const result = mergeUnits(ingredient1, ingredient2, true);

@@ -10,6 +10,6 @@ export function IngredientDisplay(
 ): React.JSX.Element {
     const ingredient: Ingredient = props.ingredient;
 
-    const formattedString = `Ingredient info - Name: ${ingredient.name}; Quantity: ${ingredient.quantity}; Unit: ${ingredient.unit}`;
+    const formattedString = `Ingredient info - Name: ${ingredient.name}; Quantity: ${ingredient.quantity}; Unit: ${ingredient.unit}; isStaple: ${ingredient.isStaple}`;
     return <ThemedText>{formattedString}</ThemedText>;
 }

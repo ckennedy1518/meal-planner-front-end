@@ -21,7 +21,7 @@ export const createPantrySlice: StateCreator<IPantrySlice> = (set) => ({
                     ingredient.name.toLowerCase()
             );
 
-            if (doesIngredientExist) {
+            if (doesIngredientExist !== undefined) {
                 return {
                     allIngredients: state.allIngredients.map((existing) =>
                         existing.name.toLowerCase() ===

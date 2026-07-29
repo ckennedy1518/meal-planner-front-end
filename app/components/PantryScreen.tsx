@@ -6,6 +6,8 @@ import { getPantryInfo } from './helpers/getPantryInfo';
 import { IngredientDisplay } from './IngredientDisplay';
 import { ThemedText } from './ThemedText';
 
+let lastRequestedToken: string | null = null;
+
 export function PantryScreen(): React.JSX.Element {
     const { isChecking, isLoggedIn } = useIsLoggedIn();
     const token: string | null = useMealPlannerStore((state) => state.token);
@@ -20,8 +22,13 @@ export function PantryScreen(): React.JSX.Element {
     }, [isChecking, isLoggedIn]);
 
     useEffect(() => {
-        if (token !== null) {
+        if (token !== null && token !== lastRequestedToken) {
+            lastRequestedToken = token;
             getPantryInfo(token);
+        }
+
+        if (token === null) {
+            lastRequestedToken = null;
         }
     }, [token]);
 
@@ -32,8 +39,8 @@ export function PantryScreen(): React.JSX.Element {
     return (
         <>
             <ThemedText>Pantry Screen</ThemedText>
-            {ingredients.forEach((i) => (
-                <IngredientDisplay ingredient={i} />
+            {ingredients.map((i) => (
+                <IngredientDisplay key={i.name} ingredient={i} />
             ))}
         </>
     );
