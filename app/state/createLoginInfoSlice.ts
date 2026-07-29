@@ -8,7 +8,6 @@ export interface ILoginInfoSlice {
     token: string | null;
     client: SupabaseClient;
     login: (user: string | null, token: string | null) => void;
-    logout: () => void;
     refreshToken: (token: string | null) => void;
 }
 
@@ -23,12 +22,6 @@ export const createLoginInfoSlice: StateCreator<ILoginInfoSlice> = (set) => ({
             user,
             token,
             isLoggedIn: true
-        })),
-    logout: () =>
-        set(() => ({
-            user: null,
-            token: null,
-            isLoggedIn: false
         })),
     refreshToken: (token: string | null) => set(() => ({ token }))
 });

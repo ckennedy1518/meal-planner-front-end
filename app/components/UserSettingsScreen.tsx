@@ -1,6 +1,6 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { Button } from 'react-native';
 import { useIsLoggedIn } from '../hooks/useIsLoggedIn';
 import { useMealPlannerStore } from '../state/useMealPlannerStore';
@@ -13,9 +13,13 @@ export function UserSettingsScreen(): React.JSX.Element {
 
     useEffect(() => {
         if (!isChecking && !isLoggedIn) {
-            useMealPlannerStore.getState().logout();
+            useMealPlannerStore.getState().reset();
         }
     }, [isChecking, isLoggedIn]);
+
+    const handleLogout = useCallback(() => {
+        useMealPlannerStore.getState().reset();
+    }, []);
 
     // TODO: Add optional settings (screen always on)
     // TODO: (day 2) add photo
@@ -25,10 +29,7 @@ export function UserSettingsScreen(): React.JSX.Element {
     return (
         <>
             <ThemedText>User Settings Screen</ThemedText>
-            <Button
-                title="Logout"
-                onPress={() => useMealPlannerStore.getState().logout()}
-            />
+            <Button title="Logout" onPress={handleLogout} />
         </>
     );
 }

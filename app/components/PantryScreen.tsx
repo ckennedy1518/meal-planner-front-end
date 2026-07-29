@@ -17,7 +17,7 @@ export function PantryScreen(): React.JSX.Element {
 
     useEffect(() => {
         if (!isChecking && !isLoggedIn) {
-            useMealPlannerStore.getState().logout();
+            useMealPlannerStore.getState().reset();
         }
     }, [isChecking, isLoggedIn]);
 
