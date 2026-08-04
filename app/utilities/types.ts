@@ -14,12 +14,23 @@ export type Ingredient = {
     unit: Unit;
     isStaple: boolean;
 };
+export type GroceryListIngredient = Ingredient & {
+    quantity_purchased: number;
+};
 export type GroceryList = {
     date: Date;
-    ingredients: Ingredient[];
+    ingredients: GroceryListIngredient[];
+};
+export type GroceryListWrapper = {
+    date: string;
+    ingredients: GroceryListIngredient[];
 };
 
 export type GetPantryInfoResponse = {
     message: string;
     pantry_items: Ingredient[];
+};
+export type GetGroceryListsResponse = {
+    message: string;
+    grocery_lists: GroceryListWrapper[];
 };

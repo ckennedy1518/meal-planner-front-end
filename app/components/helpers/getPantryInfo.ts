@@ -10,7 +10,7 @@ export async function getPantryInfo(token: string): Promise<void> {
         // TODO: get url based on if running locally?
         // need local ip rather than localhost since phone isn't running backend
         const response = await fetch(
-            'http://192.168.0.119:8080/getPantryInfo',
+            'http://192.168.0.126:8080/getPantryInfo',
             {
                 method: 'GET',
                 headers: {
@@ -26,7 +26,7 @@ export async function getPantryInfo(token: string): Promise<void> {
 
         const getPantryInfoResponse =
             (await response?.json()) as GetPantryInfoResponse;
-        getPantryInfoResponse.pantry_items.forEach((ingredient) => {
+        getPantryInfoResponse?.pantry_items?.forEach((ingredient) => {
             useMealPlannerStore.getState().addIngredient(ingredient);
         });
     } catch (error) {

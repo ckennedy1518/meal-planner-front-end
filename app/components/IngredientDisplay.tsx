@@ -1,15 +1,18 @@
-import { Ingredient } from '../utilities/types';
+import { GroceryListIngredient, Ingredient } from '../utilities/types';
 import { ThemedText } from './ThemedText';
 
 interface IIngredientDisplay {
-    ingredient: Ingredient;
+    ingredient: Ingredient | GroceryListIngredient;
 }
 
 export function IngredientDisplay(
     props: IIngredientDisplay
 ): React.JSX.Element {
-    const ingredient: Ingredient = props.ingredient;
+    const ingredient: Ingredient | GroceryListIngredient = props.ingredient;
 
-    const formattedString = `Ingredient info - Name: ${ingredient.name}; Quantity: ${ingredient.quantity}; Unit: ${ingredient.unit}; isStaple: ${ingredient.isStaple}`;
+    let formattedString = `Ingredient info - Name: ${ingredient.name}; Quantity: ${ingredient.quantity}; Unit: ${ingredient.unit}; isStaple: ${ingredient.isStaple}`;
+    if (ingredient.hasOwnProperty('quantity_purchased')) {
+        formattedString += `; Quantity Purchased: ${(ingredient as GroceryListIngredient).quantity_purchased}`;
+    }
     return <ThemedText>{formattedString}</ThemedText>;
 }

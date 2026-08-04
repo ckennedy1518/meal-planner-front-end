@@ -13,14 +13,17 @@ export function GroceryModalView(props: IGroceryModalView): React.JSX.Element {
     return (
         <ThemedText>
             {groceryLists.map((list, index) => (
-                <div key={index}>
-                    <ThemedText>
+                <>
+                    <ThemedText key={'date_themed_text' + index}>
                         Date: {list.date.toLocaleDateString()}
                     </ThemedText>
                     {list.ingredients.map((ingredient, idx) => (
-                        <IngredientDisplay key={idx} ingredient={ingredient} />
+                        <IngredientDisplay
+                            key={'ingredient_' + index + '_' + idx}
+                            ingredient={ingredient}
+                        />
                     ))}
-                </div>
+                </>
             ))}
         </ThemedText>
     );

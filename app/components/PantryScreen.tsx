@@ -4,6 +4,7 @@ import { useIsLoggedIn } from '../hooks/useIsLoggedIn';
 import { useMealPlannerStore } from '../state/useMealPlannerStore';
 import { Ingredient } from '../utilities/types';
 import { GroceryModalView } from './GroceryModalView';
+import { getGroceryLists } from './helpers/getGroceryLists';
 import { getPantryInfo } from './helpers/getPantryInfo';
 import { IngredientDisplay } from './IngredientDisplay';
 import { ThemedText } from './ThemedText';
@@ -34,6 +35,11 @@ export function PantryScreen(): React.JSX.Element {
         if (token !== null && token !== lastRequestedToken) {
             lastRequestedToken = token;
             getPantryInfo(token);
+
+            // only need to get grocery lists if there are none stored in state
+            if (groceryLists.length === 0) {
+                getGroceryLists(token);
+            }
         }
 
         if (token === null) {
@@ -51,7 +57,10 @@ export function PantryScreen(): React.JSX.Element {
         <>
             <ThemedText>Pantry Screen</ThemedText>
             {ingredients.map((i) => (
-                <IngredientDisplay key={i.name} ingredient={i} />
+                <IngredientDisplay
+                    key={'ingredient_name:' + i.name}
+                    ingredient={i}
+                />
             ))}
             <Button
                 title="I went grocery shopping"
