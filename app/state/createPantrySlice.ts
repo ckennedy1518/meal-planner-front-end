@@ -1,18 +1,21 @@
 import { StateCreator } from 'zustand';
 import { mergeUnits } from '../utilities/helpers/mergeUnits';
-import { Ingredient } from '../utilities/types';
+import { GroceryList, Ingredient } from '../utilities/types';
 
 export interface IPantrySlice {
     allIngredients: Ingredient[];
+    groceryLists: GroceryList[];
     addIngredient: (ingredient: Ingredient) => void;
     removeIngredient: (
         ingredient: Ingredient,
         shouldRemoveEntirely: boolean
     ) => void;
+    addGroceryList: (groceryList: GroceryList) => void;
 }
 
 export const createPantrySlice: StateCreator<IPantrySlice> = (set) => ({
     allIngredients: [],
+    groceryLists: [],
     addIngredient: (ingredient: Ingredient) =>
         set((state) => {
             const doesIngredientExist = state.allIngredients.find(
@@ -53,5 +56,9 @@ export const createPantrySlice: StateCreator<IPantrySlice> = (set) => ({
                         : existing
                 )
             };
-        })
+        }),
+    addGroceryList: (groceryList: GroceryList) =>
+        set((state) => ({
+            groceryLists: [...state.groceryLists, groceryList]
+        }))
 });

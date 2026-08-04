@@ -17,7 +17,8 @@ const initialState = {
     plannedRecipes: [],
     storedRecipes: [],
     selectedRecipe: null,
-    allIngredients: []
+    allIngredients: [],
+    groceryLists: []
 };
 
 export const useMealPlannerStore = create<
