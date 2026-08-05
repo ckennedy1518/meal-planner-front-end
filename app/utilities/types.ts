@@ -1,4 +1,14 @@
-export type Unit = 'Tbsp' | 'tsp' | 'C' | 'oz' | 'fl oz' | 'lbs' | 'mL' | 'g';
+export const unitValues = [
+    'Tbsp',
+    'tsp',
+    'C',
+    'oz',
+    'fl oz',
+    'lbs',
+    'mL',
+    'g'
+] as const;
+export type Unit = (typeof unitValues)[number];
 export type Mode = 'cook' | 'pantry' | 'plan' | 'settings' | null;
 
 export type Recipe = {
